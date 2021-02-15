@@ -25,6 +25,19 @@ class TweetsController extends Controller
         ]);
     }
     
+    public function show(Tweet $tweet, Comment $comment)
+    {
+        $user = auth()->user();
+        $tweet = $tweet->getTweet($tweet->id);
+        $comments = $comment->getComments($tweet->id);
+
+        return view('tweets.show', [
+            'user'     => $user,
+            'tweet' => $tweet,
+            'comments' => $comments
+        ]);
+    }
+    
     public function create()
     {
         $user = auth()->user();
