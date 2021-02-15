@@ -31,11 +31,11 @@ class CreateCommentsTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            /*$table->foreign('tweet_id')
+            $table->foreign('tweet_id')
                 ->references('id')
                 ->on('tweets')
                 ->onDelete('cascade')
-                ->onUpdate('cascade');*/
+                ->onUpdate('cascade');
         });
     }
 

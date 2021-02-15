@@ -22,12 +22,10 @@ class CreateTweetsTable extends Migration
             $table->index('text');
 
             $table->foreign('user_id')
-            /*$table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-                ->onUpdate('cascade');*/
         });
     }
 

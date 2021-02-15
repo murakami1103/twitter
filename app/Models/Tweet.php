@@ -43,6 +43,12 @@ class Tweet extends Model
         return $this->where('user_id', $user_id)->count();
     }
     
+    // 詳細画面
+    public function getTweet(Int $tweet_id)
+    {
+        return $this->with('user')->where('id', $tweet_id)->first();
+    }
+    
     // 一覧画面
     public function getTimeLines(Int $user_id, Array $follow_ids)
     {
