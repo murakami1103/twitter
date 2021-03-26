@@ -134,7 +134,7 @@ class UsersController extends Controller
         */
         
         $data = $request->all();
-        $path = $request->file('profile_image')->store('public/profile_images');
+        $path = $request->file('profile_image')->store('public/profile_image');
         $data['profile_image'] = basename($path);
         
         // 該当するデータを上書きして保存する
