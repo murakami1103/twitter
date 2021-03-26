@@ -31,7 +31,12 @@ Route::group(['middleware' => 'auth'], function() {
     
     // ツイート関連
     Route::resource('tweets', 'TweetsController', ['only' => ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']]);
-
+    
+    // いいね関連
+    Route::resource('favorites', 'FavoritesController', ['only' => ['store', 'destroy']]);
 
 });
 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
