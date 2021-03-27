@@ -14,7 +14,6 @@ class TweetsController extends Controller
     {
         $user = auth()->user();
         $follow_ids = $follower->followingIds($user->id);
-        // followed_idだけ抜き出す
         $following_ids = $follow_ids->pluck('followed_id')->toArray();
 
         $timelines = $tweet->getTimelines($user->id, $following_ids);
@@ -46,16 +45,17 @@ class TweetsController extends Controller
             'user' => $user
         ]);
     }
-    
+
     public function store(Request $request, Tweet $tweet)
     {
         $user = auth()->user();
         $data = $request->all();
+
         $validator = Validator::make($data, [
             'text' => ['required', 'string', 'max:140']
         ]);
-
         $validator->validate();
+
         $tweet->tweetStore($user->id, $data);
 
         return redirect('tweets');
@@ -96,4 +96,5 @@ class TweetsController extends Controller
 
         return redirect('tweets');
     }
+
 }
