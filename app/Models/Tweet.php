@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\softDeletes;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Tweet extends Model
 {
@@ -69,7 +69,12 @@ class Tweet extends Model
     {
         return $this->where('user_id', $user_id)->where('id', $tweet_id)->first();
     }
-
+    
+    public function tweetDestroy(Int $user_id, Int $tweet_id)
+    {
+        return $this->where('user_id', $user_id)->where('id', $tweet_id)->delete();
+    }
+    
     public function tweetUpdate(Int $tweet_id, Array $data)
     {
         $this->id = $tweet_id;
@@ -77,10 +82,5 @@ class Tweet extends Model
         $this->update();
 
         return;
-    }
-
-    public function tweetDestroy(Int $user_id, Int $tweet_id)
-    {
-        return $this->where('user_id', $user_id)->where('id', $tweet_id)->delete();
     }
 }

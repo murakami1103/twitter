@@ -23,7 +23,20 @@ class TweetsController extends Controller
             'timelines' => $timelines
         ]);
     }
+    
+    public function show(Tweet $tweet, Comment $comment)
+    {
+        $user = auth()->user();
+        $tweet = $tweet->getTweet($tweet->id);
+        $comments = $comment->getComments($tweet->id);
 
+        return view('tweets.show', [
+            'user'     => $user,
+            'tweet' => $tweet,
+            'comments' => $comments
+        ]);
+    }
+    
     public function create()
     {
         $user = auth()->user();
@@ -47,20 +60,7 @@ class TweetsController extends Controller
 
         return redirect('tweets');
     }
-
-    public function show(Tweet $tweet, Comment $comment)
-    {
-        $user = auth()->user();
-        $tweet = $tweet->getTweet($tweet->id);
-        $comments = $comment->getComments($tweet->id);
-
-        return view('tweets.show', [
-            'user'     => $user,
-            'tweet'    => $tweet,
-            'comments' => $comments
-        ]);
-    }
-
+    
     public function edit(Tweet $tweet)
     {
         $user = auth()->user();
@@ -75,7 +75,15 @@ class TweetsController extends Controller
             'tweets' => $tweets
         ]);
     }
+    
+    public function destroy(Tweet $tweet)
+    {
+        $user = auth()->user();
+        $tweet->tweetDestroy($user->id, $tweet->id);
 
+        return back();
+    }
+    
     public function update(Request $request, Tweet $tweet)
     {
         $data = $request->all();
@@ -89,11 +97,4 @@ class TweetsController extends Controller
         return redirect('tweets');
     }
 
-    public function destroy(Tweet $tweet)
-    {
-        $user = auth()->user();
-        $tweet->tweetDestroy($user->id, $tweet->id);
-
-        return back();
-    }
 }

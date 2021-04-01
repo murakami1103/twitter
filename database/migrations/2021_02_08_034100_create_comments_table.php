@@ -18,7 +18,7 @@ class CreateCommentsTable extends Migration
             $table->unsignedInteger('user_id')->comment('ユーザID');
             $table->unsignedInteger('tweet_id')->comment('ツイートID');
             $table->string('text')->comment('本文');
-            $table->softDeletes();
+            $table->SoftDeletes();
             $table->timestamps();
 
             $table->index('id');
@@ -31,11 +31,11 @@ class CreateCommentsTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            /*$table->foreign('tweet_id')
+            $table->foreign('tweet_id')
                 ->references('id')
                 ->on('tweets')
                 ->onDelete('cascade')
-                ->onUpdate('cascade');*/
+                ->onUpdate('cascade');
         });
     }
 
