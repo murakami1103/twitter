@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'ツイート編集')
 
 @section('content')
 <div class="container">
